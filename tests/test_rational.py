@@ -130,6 +130,17 @@ def test_negate(numerator, denominator, expected_numerator, expected_denominator
 ])
 def test_abs(numerator, denominator, expected_numerator, expected_denominator):
     rational = Rational(numerator, denominator)
-    result = rational.negate()
+    result = rational.abs()
+    assert result.numerator == expected_numerator
+    assert result.denominator == expected_denominator
+
+@pytest.mark.parametrize("numerator, denominator, expected_numerator, expected_denominator", [
+    (1, 1, 1, 1),
+    (-1, 1, -1, 1),
+    (2, 1, 1, 2)
+])
+def test_reciprocal(numerator, denominator, expected_numerator, expected_denominator):
+    rational = Rational(numerator, denominator)
+    result = rational.reciprocal()
     assert result.numerator == expected_numerator
     assert result.denominator == expected_denominator
