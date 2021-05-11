@@ -56,11 +56,11 @@ class Rational():
         self.__reshape()
         return self
 
-    def compareTo(self, other: Rational) -> int:
+    def compare_to(self, other: Rational) -> int:
         result = self.to_float() - other.to_float()
         return -1 if result < 0 else 1 if result > 0 else 0
 
-    def compareTo(self, other: Rational) -> bool:
+    def equals(self, other: Rational) -> bool:
         return self.denominator == other.denominator and self.numerator == other.numerator
 
     def to_string(self) -> str:
@@ -79,6 +79,7 @@ class Rational():
         tmp = self._numerator
         self._numerator = self.denominator
         self._denominator = tmp
+        self.__reshape()
         return self
 
     def __reshape(self):
@@ -93,4 +94,7 @@ class Rational():
         self._numerator = round(self._numerator / divider)
         self._denominator = round(self._denominator / divider)
 
+        below_zero = self.to_float() < 0
+        self._numerator = -abs(self._numerator) if below_zero else abs(self._numerator)
+        self._denominator = abs(self._denominator)
     
